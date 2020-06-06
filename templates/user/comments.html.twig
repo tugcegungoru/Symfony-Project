@@ -1,0 +1,61 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}User Comments{% endblock %}
+
+{% block body %}
+    <br><br><br><br><br><br><br><br><br><br>
+    {{ include ('user/usermenu.html.twig') }}
+    <div class="container">
+        <div>
+            <div class="col">
+                <div class="section_title_container text-center">
+                    <div class="section_subtitle">take a look at our</div>
+                    <div class="section_title">My Comments</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row news_row">
+            <div class="news_item">
+                <div class="news_content">
+                    <div class="news_title" style="text-align: center">New Regulations on the Crypto Market</div>
+                    <div class="news_text">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Comment</th>
+                                <th>Status</th>
+                                <th>Duyuru</th>
+                                <th>Created_at</th>
+                                <th>Rate</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for comment in comments %}
+                                <tr>
+                                    <td>{{ comment.subject }}</td>
+                                    <td>{{ comment.comment }}</td>
+                                    <td>{{ comment.status }}</td>
+                                    <td nowrap><a href="{{ path('duyuru_show', {'id':comment.duyuruid}) }}">{{ comment.title }}</a></td>
+                                    <td>{{ comment.created_at }}</td>
+                                    <td>{{ comment.rate }}</td>
+                                    <td>
+                                        <a href="" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="10">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </div>
+{% endblock %}

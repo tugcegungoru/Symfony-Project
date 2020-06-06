@@ -1,0 +1,136 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ duyuru.title }}{% endblock %}
+{% block keywords %}{{ duyuru.keywords }}{% endblock %}
+{% block description %}{{ duyuru.description }}{% endblock %}
+{% block body %}
+    <SCRIPT language="JavaScript" type="text/javascript">
+        function openWin(windowURL,windowName,windowFeatures) { window.open(windowURL,windowName,windowFeatures);}
+    </SCRIPT>
+    <br><br><br><br><br><br><br>
+    <div>
+        <div  style="height: 200px; width: 700px; left: 400px">
+            <div class="home_slider_container">
+                <!-- Home Slider -->
+                <br><br><br>
+                <div class="owl-carousel owl-theme home_slider">
+
+                    <!-- Slider Item -->
+                    <div class="owl-item">
+                        <div class="slider_background" style="background-image:url({{ asset('uploads/images/'~ duyuru.image) }})"></div>
+                    </div>
+                    {%  for rs in images %}
+                        <!-- Slider Item -->
+                        <div class="owl-item">
+                            <div class="slider_background" style="background-image:url({{ asset('uploads/images/'~ rs.image) }})"></div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="home_slider_nav home_slider_prev d-flex flex-column align-items-center justify-content-center"><img src="{{ asset ('assets') }}/images/arrow_l.png" alt=""></div>
+                <div class="home_slider_nav home_slider_next d-flex flex-column align-items-center justify-content-center"><img src="{{ asset ('assets') }}/images/arrow_r.png" alt=""></div>
+            </div>
+        </div>
+        <br><br><br>
+        <div class="container">
+            <div>
+                <div class="col">
+                    <div class="section_title_container text-center">
+                        <div class="section_subtitle">{{ duyuru.title }}</div>
+                        <div class="section_title">Announcement Detail</div>
+                    </div>
+                </div>
+            </div>
+            <div class="news_item">
+                <div class="news_content">
+                    <div class="news_title"></div>
+                    <div class="news_text">
+                        <table class="table" style="text-align: center">
+                            <tbody>
+                            <tr>
+                                <th>Title</th>
+                                <td>{{ duyuru.title }}</td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td>{{ duyuru.detail | raw }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row news_row">
+                <!-- News Item -->
+                <div class="col-lg-6 news_col" style="left: 300px">
+                    <div class="news_item" style="text-align: center; top: 20px">
+                        <div class="news_image" >
+                            <br><br>
+                            <img src="{{ asset ('uploads/images/' ~duyuru.image) }}" alt="">
+                        </div>
+                        <div class="news_content">
+                            <div class="news_title"></div>
+                            <div class="news_text" >
+                                <p>
+                                    {% for rs in comments %}
+                                    {{ rs.subject }} [Rate:{{ rs.rate }}]<br>
+                                    {{ rs.comment }}<br>
+                                    {% endfor %}
+                                    {% if app.user %}
+                                    {{ include ('messages.html.twig') }}
+                                <div class="contact_form_container">
+
+                                    <form name="comment" action="{{ path('user_new_comment',{'id': duyuru.id}) }}" method="post" class="contact_form">
+                                        <div class="row">
+                                            <div class="col-md-12" >
+
+                                                <h4>Write your comment us</h4>
+                                                <input type="text" id="comment_name" name="comment[name]" class="input_item" placeholder="Your Name" required="required">
+                                                <br><br>
+                                            </div>
+                                            <br>
+                                            <div class="col-md-12">
+                                                <input type="email" id="comment_email" name="comment[email]"class="input_item" placeholder="Your E-mail" required="required">
+                                                <br><br>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <input type="text" id="comment_subject" name="comment[subject]"class="input_item" placeholder="Subject" style="height:40px;">
+                                                <br><br>
+                                            </div><br><br>
+                                            <div class="col-md-12">
+                                                <select id="comment_rate" name="[comment_rate]" class="input_item">
+                                                    <option>5</option>
+                                                    <option>4</option>
+                                                    <option>3</option>
+                                                    <option>2</option>
+                                                    <option>1</option>
+                                                </select>
+                                                <br><br>
+                                            </div><br><br>
+                                            <div class="col-md-12">
+                                                <textarea id="comment_comment" name="comment[comment]" maxlength="255" class="input_item" placeholder=" Your Comment" required="required" data-error="Please, write us your comment."></textarea>
+                                                <br><br>
+                                            </div>
+                                            <input type="hidden" name="token" value="{{csrf_token('comment')}}" />
+                                            <div class="col-md-12">
+                                                <button id="contact_btn" type="submit" class="btn btn-primary" value="Submit">Send Comment</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    {% else %}
+                                        <li>
+                                            <a href="/loginuser"><i class="login">If you want to add comment please login</i></a>
+                                        </li>
+                                    {% endif %}
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="news_button" style="color: #000000">Announcement Detail Information</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div><br><br>
+{% endblock %}

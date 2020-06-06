@@ -1,0 +1,49 @@
+
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ app.user.name }}Profile{% endblock %}
+
+{% block body %}
+    <br><br><br><br><br><br><br><br><br><br>
+    {{ include ('user/usermenu.html.twig') }}
+    <div class="container">
+        <div>
+            <div class="col">
+                <div class="section_title_container text-center">
+                    <div class="section_subtitle"></div>
+                    <div class="section_title">Edit Profile</div>
+                </div>
+            </div>
+        </div>
+        <div class="row news_row">
+            <div class="news_item">
+                <div class="news_content">
+                    <div class="news_text">
+                        <!-- News -->
+                        <div class="col-md-10" style="display:inline-block">
+                            <div class="container" style="display: inline-block">
+                                <div class="row">
+
+                                    <!-- News Post -->
+                                    <div class="col-lg-4 news_col">
+                                        <div class="news_post">
+                                            <div class="news_date d-flex flex-column align-items-center justify-content-center"></div>
+                                            <div class="news_content">
+                                                <div class="news_text">
+                                                    <p>
+                                                        {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}New Category{% endblock %}
+
+{% block body %}
+
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="dashboard-wrapper">
+        <div class="container-fluid dashboard-content">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h1>Create New Category</h1>
+
+                    {{ include('admin/category/_form.html.twig') }}
+                    <br>
+                    <div class="col-md-2">
+                        <a href="{{ path('category_index') }}" class="btn btn-primary btn-block">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

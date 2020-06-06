@@ -1,0 +1,50 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block body %}
+
+    <div class="dashboard-wrapper">
+        <div class="container-fluid dashboard-content">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                    <a href="{{ path('setting_new') }}" class="btn btn-outline-primary">Create New Announcement</a>
+                    <br>
+
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Company</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for setting in settings %}
+                            <tr>
+                                <td>{{ setting.id }}</td>
+                                <td>{{ setting.title }}</td>
+                                <td>{{ setting.company }}</td>
+                                <td>{{ setting.email }}</td>
+                                <td>{{ setting.status }}</td>
+                                <td>
+                                    <a href="{{ path('setting_show', {'id': setting.id}) }}" class="btn btn-primary btn-block">show</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('setting_edit', {'id': setting.id}) }}" class="btn btn-success">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="10">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
